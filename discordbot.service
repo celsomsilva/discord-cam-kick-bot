@@ -1,0 +1,19 @@
+[Unit]
+Description=Discord CAM Kick Bot
+After=network.target
+
+[Service]
+Type=simple
+User=<your user>
+WorkingDirectory=<botpath>
+ExecStart=/usr/bin/python3 <botpath>/bot.py
+Restart=always
+RestartSec=5
+EnvironmentFile=<botpath>/.env
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+
+
