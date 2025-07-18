@@ -2,13 +2,13 @@ import os
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
-import asyncio 
-import logging
+import asyncio
 
 # === Load environment variables ===
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
 CHANNEL_ID = int(os.getenv("CHANNEL_ID"))
+WHITELIST_ROLE_IDS = list(map(int, os.getenv("WHITELIST_ROLE_IDS", "").split(",")))
 
 if not TOKEN or not CHANNEL_ID:
     raise ValueError("Missing TOKEN or CHANNEL_ID.")
@@ -17,11 +17,12 @@ if not TOKEN or not CHANNEL_ID:
 os.makedirs("logs", exist_ok=True)
 
 def log_event(log_type, message):
+    # Write log entries to security or activity log
     file = "logs/security.log" if log_type == "security" else "logs/activity.log"
     with open(file, "a") as f:
         f.write(f"[{log_type.upper()}] {message}\n")
 
-# === Initialize the bot with required intents ===
+# === Bot intents ===
 intents = discord.Intents.default()
 intents.voice_states = True
 intents.guilds = True
@@ -42,8 +43,14 @@ async def on_voice_state_update(member, before, after):
 
         await asyncio.sleep(20)
 
-        # Check if still in the same channel
+        # Check if member is still in the same channel after 20s
         if member.voice and member.voice.channel and member.voice.channel.id == CHANNEL_ID:
+            # Skip action if member is whitelisted by role
+            if any(role.id in WHITELIST_ROLE_IDS for role in member.roles):
+                log_event("activity", f"{member} is whitelisted by role. No action taken.")
+                return
+
+            # Skip action if user has active camera
             if member.voice.self_video:
                 log_event("activity", f"{member} has camera ON. No action taken.")
             else:
@@ -53,19 +60,16 @@ async def on_voice_state_update(member, before, after):
 
                     try:
                         await member.send(
-                        "You were removed from the voice channel because you stayed longer than 20 seconds. "
-                        "This channel is monitored and not intended for idle presence."
-
+                           "You were removed from the '🎬|cam-only' channel because your camera was off for longer than 20 seconds. "
+                            "Please reconnect and turn on your camera."
                         )
                         log_event("activity", f"DM sent to {member}.")
                     except discord.Forbidden:
                         log_event("security", f"Could not send DM to {member}.")
                     except Exception as e:
                         log_event("security", f"DM error to {member}: {e}")
-
                 except Exception as e:
                     log_event("security", f"Failed to move {member}: {e}")
 
 if __name__ == "__main__":
     bot.run(TOKEN)
-

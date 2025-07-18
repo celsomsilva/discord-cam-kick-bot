@@ -5,10 +5,10 @@
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
 
 
-# Discord CAM Kick Bot
+# Discord cam Kick Bot
 
 
-A Discord bot that makes sure your members follow the rules in video-only voice channels.
+A Discord bot that makes sure your members follow the rules in cam-only voice channels.
 
 > This bot was created for the "AI Engineering, Data Science & Software Engineering Community" Discod server.  
 > A place where voice channels will have **rules**, and cameras **must be on**.  
@@ -19,7 +19,7 @@ A Discord bot that makes sure your members follow the rules in video-only voice 
 ## Features
 
 - Monitors a specific voice channel
-- Kicks users who don’t enable their camera in time (20 seconds)
+- Kicks users who don’t enable their camera in time (20 seconds) — **except for users with a specific role**
 - Sends a DM with a reason for the kick
 - Runs as a `systemd` service (auto-start on boot)
 - Secure `.env` file for token and config
@@ -49,6 +49,14 @@ discord-cam-kick-bot/
 ```
 
 
+## Notes
+
+- Make sure the bot has permission to move members out of the voice channel.
+- The bot’s role must be **higher** than the roles of users it may need to remove, **except for users with a specific role**.
+- The bot does **not** ban or kick from the server — only removes from the voice channel.
+
+
+
 ---
 ## How to use
 
@@ -62,8 +70,9 @@ cd discord-cam-kick-bot
 2. Create a .env file (based on .env.example) and set your values:
 
 ```env
-TOKEN=your_bot_token
-CHANNEL_ID=your_voice_channel_id
+TOKEN=your_discord_bot_token
+CHANNEL_ID=123456789012345678
+WHITELIST_ROLE_IDS=1234567890,9876543210
 ```
 
 3. Install dependencies:
@@ -92,6 +101,15 @@ To check the status:
 sudo systemctl status discordbot
 ```
 
+### .env.example
+
+```env
+TOKEN=your_discord_bot_token
+CHANNEL_ID=your_voice_channel_id
+WHITELIST_ROLE_IDS= your white list
+```
+
+Never commit your real .env file. 
 
 ---
 ##  Logs Directory
@@ -107,22 +125,23 @@ The bot creates logs inside a `logs/` folder:
 ---
 ## Security
 
+ - Secrets are never hardcoded:
+All sensitive information such as bot tokens, API keys, and channel or role IDs are loaded securely from environment variables (.env), never stored directly in the source code or repository.
 
- - Secrets are never hardcoded
+ - No tokens or user data are logged:
+The bot does not log sensitive tokens or personal user data. Only relevant activity and security events (e.g., unauthorized access attempts, permission errors) are logged in a controlled manner to support auditing and debugging.
 
- - No tokens or user data are logged
- 
- 
- 
---- 
-## .env.example
+ - Role-based whitelist for protected members:
+To prevent accidental or malicious removal of privileged users (e.g., admins, moderators), the bot uses a whitelist based on role IDs. This ensures that users with certain roles are immune from kick or move actions.
 
-```env
-TOKEN=your_discord_bot_token
-CHANNEL_ID=your_voice_channel_id
-```
+ - Permission checks respecting Discord hierarchy:
+Before attempting to move or kick a member, the bot verifies the Discord role hierarchy and permission levels, ensuring it cannot perform actions on users with higher or equal permissions.
 
-Never commit your real .env file. 
+ - Limited scope of actions:
+The bot only performs actions within a specific monitored voice channel, minimizing the risk of unintended behavior elsewhere in the server.
+
+ - Error handling and logging:
+All permission errors and exceptions are caught and logged safely without exposing sensitive information.
 
 
 
@@ -139,10 +158,13 @@ For this bot to operate correctly, make sure it has the following permissions:
 - **View Channels** — to access the monitored channel    
 - **Use Voice Activity / Use Camera** (optional)
 
-> Within the server, you can restrict these permissions to specific channels by removing the bot role’s global permissions and enabling them only in the desired channels (but it will disappear from the members list).
+Within the server, you can restrict these permissions to specific channels by removing the bot role’s global permissions and enabling them only in the desired channels (but it will disappear from the members list).
 
-> Minimal intents are included in the code.  
-  If you want to add command handling or message reading, you'll need to enable additional intents and update the bot accordingly.
+Minimal intents are included in the code.  
+ If you want to add command handling or message reading, you'll need to enable additional intents and update the bot accordingly.
+
+> To avoid using powerful roles like `Admin` or `Moderator` in the whitelist, you can create a harmless role (e.g., `basic role`) with no special permissions and assign it to trusted users.  
+The bot will recognize them and **won’t remove them**, even if the camera is off.
 
 
 ---
