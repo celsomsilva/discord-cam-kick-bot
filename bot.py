@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 import asyncio
+timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 # === Load environment variables ===
 load_dotenv()
@@ -17,10 +18,11 @@ if not TOKEN or not CHANNEL_ID:
 os.makedirs("logs", exist_ok=True)
 
 def log_event(log_type, message):
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     # Write log entries to security or activity log
     file = "logs/security.log" if log_type == "security" else "logs/activity.log"
     with open(file, "a") as f:
-        f.write(f"[{log_type.upper()}] {message}\n")
+        f.write(f"[{timestamp}] [{log_type.upper()}] {message}\n")
 
 # === Bot intents ===
 intents = discord.Intents.default()
