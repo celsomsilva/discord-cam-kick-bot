@@ -48,7 +48,7 @@ discord-cam-kick-bot/
 └── README.md
 ```
 
-
+---
 ## Notes
 
 - Make sure the bot has permission to move members out of the voice channel.
@@ -67,7 +67,16 @@ git clone git@github.com:celsomsilva/discord-cam-kick-bot.git
 cd discord-cam-kick-bot
 ```
 
-2. Create a .env file (based on .env.example) and set your values:
+2. Create a virtual environment (optional, but recommended)
+
+Using `venv` ensures your dependencies are isolated and do not interfere with other Python projects.
+
+```bash
+python3 -m venv venv
+source venv/bin/activate 
+```
+
+3. Create a .env file (based on .env.example) and set your values:
 
 ```env
 TOKEN=your_discord_bot_token
@@ -75,13 +84,13 @@ CHANNEL_ID=123456789012345678
 WHITELIST_ROLE_IDS=1234567890,9876543210
 ```
 
-3. Install dependencies:
+4. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Run the bot manually:
+5. Run the bot manually:
 
 ```bash
 python3 bot.py
