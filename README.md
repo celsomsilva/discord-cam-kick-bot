@@ -62,7 +62,7 @@ discord-cam-kick-bot/
 
 1. Clone this repo:
 
-```bash
+```
 git clone git@github.com:celsomsilva/discord-cam-kick-bot.git
 cd discord-cam-kick-bot
 ```
@@ -71,14 +71,14 @@ cd discord-cam-kick-bot
 
 Using `venv` ensures your dependencies are isolated and do not interfere with other Python projects.
 
-```bash
+```
 python3 -m venv venv
 source venv/bin/activate 
 ```
 
 3. Create a .env file (based on .env.example) and set your values:
 
-```env
+```
 TOKEN=your_discord_bot_token
 CHANNEL_ID=123456789012345678
 WHITELIST_ROLE_IDS=1234567890,9876543210
@@ -86,19 +86,19 @@ WHITELIST_ROLE_IDS=1234567890,9876543210
 
 4. Install dependencies:
 
-```bash
+```
 pip install -r requirements.txt
 ```
 
 5. Run the bot manually:
 
-```bash
+```
 python3 bot.py
 ```
 
 Or set it up as a Linux service for auto-start on boot:
 
-```bash
+```
 sudo cp discordbot.service /etc/systemd/system/
 sudo systemctl daemon-reexec
 sudo systemctl enable discordbot
@@ -106,13 +106,13 @@ sudo systemctl start discordbot
 ```
 To check the status:
 
-```bash
+```
 sudo systemctl status discordbot
 ```
 
 ### .env.example
 
-```env
+```
 TOKEN=your_discord_bot_token
 CHANNEL_ID=your_voice_channel_id
 WHITELIST_ROLE_IDS= your white list
@@ -210,9 +210,24 @@ Running your bot as a service provides:
 - Oracle Cloud’s Always Free instances(VM.Standard.E2.1.Micro), but **its use is not required**.
 
 
---- 
-## License
+---
 
-MIT. Use it, fork it, break it, improve it. 
+## About the Author
+
+I’m a Data Science and Analytics specialist (USP postgraduate) and Computer Engineer (UERJ) with a career spanning from **Pascal/C/Java roots** to **modern Machine Learning and AI**.
+
+My academic and professional background includes:
+
+* **Computation in general**
+* **Machine Learning**
+* **Hierarchical nonlinear mixed models (HLM3/HLM2)**, **Intraclass correlation (ICC)** and other topics about **HLM**
+* **Residual diagnostics and model validation**
+* **Deep Learning, LLMs, and Reinforcement Learning (ongoing specialization)**
+
+--- 
+## Contact  
+
+- [LinkedIn](https://linkedin.com/in/celso-m-silva)  
+- Or open an [issue](https://github.com/celsomsilva/discord-cam-kick-bot/issues) 
 
 
