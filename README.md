@@ -10,7 +10,7 @@
 
 A Discord bot that makes sure your members follow the rules in cam-only voice channels.
 
-> This bot was created for the "AI Engineering, Data Science & Software Engineering Community" Discod server.  
+> This bot was created for the "AI Engineering, Data Science & Software Engineering Community" Discord server.  
 > A place where voice channels will have **rules**, and cameras **must be on**.  
 > Think of this bot as a bouncer equipped with a webcam detector.
 
@@ -135,13 +135,13 @@ The bot creates logs inside a `logs/` folder:
 ## Security
 
  - Secrets are never hardcoded:
-All sensitive information such as bot tokens, API keys, and channel or role IDs are loaded securely from environment variables (.env), never stored directly in the source code or repository.
+All sensitive information, such as bot tokens, API keys, and channel or role IDs are loaded securely from environment variables (.env), never stored directly in the source code or repository.
 
  - No tokens or user data are logged:
 The bot does not log sensitive tokens or personal user data. Only relevant activity and security events (e.g., unauthorized access attempts, permission errors) are logged in a controlled manner to support auditing and debugging.
 
  - Role-based whitelist for protected members:
-To prevent accidental or malicious removal of privileged users (e.g., admins, moderators), the bot uses a whitelist based on role IDs. This ensures that users with certain roles are immune from kick or move actions.
+To prevent accidental or malicious removal of privileged users (e.g., admins, moderators), the bot uses a whitelist based on role IDs. This ensures that users with certain roles are immune to kick or move actions.
 
  - Permission checks respecting Discord hierarchy:
 Before attempting to move or kick a member, the bot verifies the Discord role hierarchy and permission levels, ensuring it cannot perform actions on users with higher or equal permissions.
