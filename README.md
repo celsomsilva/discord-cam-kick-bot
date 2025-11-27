@@ -62,7 +62,7 @@ discord-cam-kick-bot/
 
 1. Clone this repo:
 
-```
+```bash
 git clone git@github.com:celsomsilva/discord-cam-kick-bot.git
 cd discord-cam-kick-bot
 ```
@@ -71,7 +71,7 @@ cd discord-cam-kick-bot
 
 Using `venv` ensures your dependencies are isolated and do not interfere with other Python projects.
 
-```
+```bash
 python3 -m venv venv
 source venv/bin/activate 
 ```
@@ -86,19 +86,19 @@ WHITELIST_ROLE_IDS=1234567890,9876543210
 
 4. Install dependencies:
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
 5. Run the bot manually:
 
-```
+```bash
 python3 bot.py
 ```
 
 Or set it up as a Linux service for auto-start on boot:
 
-```
+```bash
 sudo cp discordbot.service /etc/systemd/system/
 sudo systemctl daemon-reexec
 sudo systemctl enable discordbot
@@ -106,7 +106,7 @@ sudo systemctl start discordbot
 ```
 To check the status:
 
-```
+```bash
 sudo systemctl status discordbot
 ```
 
@@ -115,7 +115,7 @@ sudo systemctl status discordbot
 ```
 TOKEN=your_discord_bot_token
 CHANNEL_ID=your_voice_channel_id
-WHITELIST_ROLE_IDS= your white list
+WHITELIST_ROLE_IDS=your white list
 ```
 
 Never commit your real .env file. 
