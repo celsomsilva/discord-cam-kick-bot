@@ -12,7 +12,7 @@ This bot monitors a specific voice channel and removes users who refuse to turn 
 ---
 
 ## Features
-- Detects users joining without camera
+- Detects users joining without a camera
 - Gives a 20-second grace period
 - Moves (kicks) non-compliant users out of the channel
 - Supports whitelist roles that are never kicked
@@ -78,13 +78,15 @@ The production bot is currently running in a production-grade Discord community 
 (The main server is still private while being built).
 
 
-<img src="prints/server.png" width="400">
+<img src="prints/server.png" width="600">
 
-<p align="center">
-  <img src="prints/some channels.png" width="350">
-  <img src="prints/multilingue.png" width="350">
-  <img src="prints/some channels after choose.png" width="350">
-</p>
+<div style="display: flex; justify-content: space-around; align-items: flex-start;">
+  <img src="prints/some channels.png" width="250" />
+  <img src="prints/multilingue.png" width="250" />
+  <img src="prints/some channels after choose.png" width="250" />
+</div>
+
+
 
 
 ---
