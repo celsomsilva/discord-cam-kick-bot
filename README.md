@@ -1,82 +1,67 @@
-![Python](https://img.shields.io/badge/Python-3.10-blue?logo=python)
-![Discord.py](https://img.shields.io/badge/discord.py-2.3-lightgrey?logo=discord)
-![Systemd](https://img.shields.io/badge/Service-systemd-brightgreen)
-![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
 
+# Discord Cam Kick Bot
 
-# Discord Cam Kick Bot  
-Automatically enforce “camera-on” rules in Discord voice channels.
+A small bot that enforces *camera-on* rules in specific Discord voice channels.
 
-This bot monitors a specific voice channel and removes users who refuse to turn on their camera after a short grace period. It is designed for professional, educational, or moderated communities where on-camera presence is required.
+It watches a voice channel, gives users a short grace period, and removes anyone who stays without a camera on.
+Useful for communities, study groups, or moderated servers where cam presence is required.
 
 ---
 
 ## Features
-- Detects users joining without a camera
-- Gives a 20-second grace period
-- Moves (kicks) non-compliant users out of the channel
-- Supports whitelist roles that are never kicked
-- Fully configurable through `.env`
-- Activity & security logs
-- Runs as a `systemd` service (auto-start & auto-restart)
+
+* Detects users joining without a camera
+* 20-second grace period
+* Moves (kicks) users who stay cam-off
+* Optional whitelist roles
+* Fully configurable through `.env`
+* Activity + security logs
+* Can run as a `systemd` service for auto-start and recovery
 
 ---
 
-### Instances Included in This Project
+## Bot Instances
 
-This repository powers **two official bot instances**:
+This repo powers **two separate bots**:
 
-* **Production bot** – runs exclusively on my community server.
-* **Demo bot** – runs exclusively on a public test server for recruiters and developers.
+* **Production bot** – runs on my main community server
+* **Demo bot** – runs on a public test server for recruiters/devs
 
-Both use the same source code from this repository but operate on **separate tokens**, **separate environments**, and **separate servers**.
+Both use the same code but run with **different tokens**, **different configs**, **different servers**.
 
-Invite URL for the production bot: [Production invite](https://discord.com/oauth2/authorize?client_id=1394511324431646870&permissions=17894400&integration_type=0&scope=bot)
-
----
-
-## Official Demo Server
-
-Demo Server: *(https://discord.gg/XRrC8EPsnC)*
-
-
-
-### About The Demo Server
-
-The demo server exists only to demonstrate the Discord Camera Kick Bot. It is just a demo environment, not a real community. No onboarding, no rules, no chat channels — only the bot in action.
-
-To test the bot there:
-
-- Join the cam-only voice channel
-
-
-- Don't connect your CAM.
-
-
-- The bot will automatically move you out after 20 seconds and send a message to you.
-
+Production invite:
+[https://discord.com/oauth2/authorize?client_id=1394511324431646870&permissions=17894400&integration_type=0&scope=bot](https://discord.com/oauth2/authorize?client_id=1394511324431646870&permissions=17894400&integration_type=0&scope=bot)
 
 ---
 
+## Demo Server
 
-### About The Main Server(prints bellow):
+Public demo: **[https://discord.gg/XRrC8EPsnC](https://discord.gg/XRrC8EPsnC)**
 
-The production bot is currently running in a production-grade Discord community (in construction), designed with:
+The demo exists only to showcase the bot — nothing else.
+No onboarding, no extra channels, no rules. Just join, enter the cam-only channel, and see the bot act.
 
-- multi-language onboarding
+How to test it:
 
-- role-based access
+1. Join the voice channel
+2. Don’t enable your camera
+3. Wait ~20 seconds
+4. The bot will move you out and send you a message
 
-- advanced permission architecture
+---
 
-- camera-on channels
+## Main Server (screenshots below)
 
-- categories for data science, AI, and engineering
+The production bot runs on a full community server currently under construction:
 
-- professional server layout
+* multilingual onboarding
+* role-based access
+* camera-on channels
+* categories for data science, AI, engineering
+* structured permissions
+* professional layout
 
-(The main server is still private while being built).
-
+*(Server is private while being built.)*
 
 <img src="prints/server.png" width="600">
 
@@ -86,70 +71,71 @@ The production bot is currently running in a production-grade Discord community 
   <img src="prints/some channels after choose.png" width="250" />
 </div>
 
-
-
-
 ---
 
-## Want to run this bot in your own server?
+## Run This Bot on Your Server
 
-You absolutely can.
+You can deploy your own instance easily:
 
-Just follow the installation steps in this README:
-
-1. Create your own Discord Application
+1. Create a Discord Application
 2. Add a Bot to it
-3. Generate your bot token
-4. Create a `.env` file based on the example
+3. Grab your bot token
+4. Create a `.env` file
 5. Install dependencies
-6. Run it or deploy it as a service (systemd)
+6. Run normally or via `systemd`
 
-The architecture of this project was designed so that **anyone** can deploy their own instance safely.
-
+The architecture is intentionally simple so anyone can host it safely.
 
 ---
 
 ## Installation (Developers)
 
 1. Clone:
+
 ```
 git clone https://github.com/celsomsilva/discord-cam-kick-bot.git
 cd discord-cam-kick-bot
 ```
 
-2. Optional venv:
+2. Optional virtual env:
+
 ```
 python3 -m venv venv
 source venv/bin/activate
 ```
 
 3. Install:
+
 ```
 pip install -r requirements.txt
 ```
 
-4. Configure `.env`
+4. Configure `.env`:
+
 ```
 TOKEN=your_bot_token
-CHANNEL_ID=your_target_voice_channel
-WHITELIST_ROLE_IDS=your_list  example: 111111111,222222222
+CHANNEL_ID=voice_channel_id
+WHITELIST_ROLE_IDS=comma_separated_roles
 ```
 
-5. Test:
+5. Run:
+
 ```
 python3 bot.py
 ```
 
 ---
 
-
 ## systemd Service
-Copy service:
+
+Copy service file:
+
 ```
 sudo cp discordbot.service /etc/systemd/system/
 ```
 
-Enable:
+Enable and start:
+
 ```
 sudo systemctl daemon-reexec
 sudo systemctl enable discordbot
@@ -157,36 +143,36 @@ sudo systemctl start discordbot
 ```
 
 Logs:
+
 ```
 journalctl -u discordbot -f
 ```
 
 ---
 
-
 ## Project Structure
+
 ```
 discord-cam-kick-bot/
-├── bot.py
-├── .env.example
-├── requirements.txt
-├── discordbot.service
-├── logs/
-│   ├── activity.log
-│   └── security.log
-└── README.md
+ bot.py
+ .env.example
+ requirements.txt
+ discordbot.service
+ logs/
+    activity.log
+    security.log
+ README.md
 ```
 
 ---
 
-
 ## Security
-- No tokens hardcoded
-- `.env` secrets
-- Role hierarchy respected
-- Safe logging	
 
----
+* Secrets stored in `.env`
+* No hardcoded tokens
+* Respects Discord role hierarchy
+* Separate activity/security logs
+
 
 
 ## Author
