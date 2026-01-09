@@ -65,11 +65,6 @@ The production bot runs on a full community server currently under construction:
 
 <img src="prints/server.png" width="600">
 
-<div style="display: flex; justify-content: space-around; align-items: flex-start;">
-  <img src="prints/some channels.png" width="250" />
-  <img src="prints/multilingue.png" width="250" />
-  <img src="prints/some channels after choose.png" width="250" />
-</div>
 
 ---
 
