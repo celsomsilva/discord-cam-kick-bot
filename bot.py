@@ -3,13 +3,13 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 import asyncio
-timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 # === Load environment variables ===
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
 CHANNEL_ID = int(os.getenv("CHANNEL_ID"))
-WHITELIST_ROLE_IDS = list(map(int, os.getenv("WHITELIST_ROLE_IDS", "").split(",")))
+raw_roles = os.getenv("WHITELIST_ROLE_IDS", "")
+WHITELIST_ROLE_IDS = [int(r) for r in raw_roles.split(",") if r.strip().isdigit()]
 
 if not TOKEN or not CHANNEL_ID:
     raise ValueError("Missing TOKEN or CHANNEL_ID.")

@@ -90,6 +90,9 @@ The architecture is intentionally simple so anyone can host it safely.
 
 ## Installation (Developers)
 
+
+Note: This bot requires Server Members Intent enabled in the Discord Developer Portal.
+
 1. Clone:
 
 ```
