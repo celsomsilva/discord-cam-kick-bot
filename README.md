@@ -6,6 +6,15 @@ A small bot that enforces *camera-on* rules in specific Discord voice channels.
 It watches a voice channel, gives users a short grace period, and removes anyone who stays without a camera on.
 Useful for communities, study groups, or moderated servers where cam presence is required.
 
+> **Note**
+>
+> This repository is currently being evolved toward a more complete and modular architecture.
+>  
+> The bot is fully functional and running in production, while internal structure improvements
+> are being developed incrementally.
+>
+
+
 ---
 
 ## Features
@@ -50,9 +59,9 @@ How to test it:
 
 ---
 
-## Main Server (screenshots below)
+## Main Server 
 
-The production bot runs on a full community server currently under construction:
+The production bot runs on my full community server currently under construction:
 
 * multilingual onboarding
 * role-based access
@@ -62,9 +71,6 @@ The production bot runs on a full community server currently under construction:
 * professional layout
 
 *(Server is private while being built.)*
-
-<img src="prints/server.png" width="600">
-
 
 ---
 
