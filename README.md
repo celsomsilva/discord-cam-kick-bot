@@ -7,15 +7,26 @@ It watches a voice channel, gives users a short grace period, and removes anyone
 Useful for communities, study groups, or moderated servers where cam presence is required.
 
 > **Note**
->
+> 
 > This repository is currently being evolved toward a more complete and modular architecture.
 >  
 > The bot is fully functional and running in production, while internal structure improvements
 > are being developed incrementally.
->
+> 
+
 
 
 ---
+## Environment
+
+This bot runs on a Linux server.
+
+The production instance is hosted on an Oracle Cloud Infrastructure (OCI) Always Free VM (VM.Standard.E2.1.Micro).
+
+You may also run it locally or on any other cloud provider.
+
+
+--- 
 
 ## Features
 
