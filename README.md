@@ -44,8 +44,8 @@ You may also run it locally or on any other cloud provider.
 
 This repo powers **two separate bots**:
 
-* **Production bot** – runs on my main community server
-* **Demo bot** – runs on a public test server for recruiters/devs
+* **Production bot** - runs on my main community server
+* **Demo bot** - runs on a public test server for recruiters/devs
 
 Both use the same code but run with **different tokens**, **different configs**, **different servers**.
 
@@ -58,7 +58,7 @@ Production invite:
 
 Public demo: **[https://discord.gg/XRrC8EPsnC](https://discord.gg/XRrC8EPsnC)**
 
-The demo exists only to showcase the bot — nothing else.
+The demo exists only to showcase the bot - nothing else.
 No onboarding, no extra channels, no rules. Just join, enter the cam-only channel, and see the bot act.
 
 How to test it:
@@ -195,7 +195,7 @@ discord-cam-kick-bot/
 This project was developed by an engineer and data scientist with a background in:
 
 * Postgraduate degree in **Data Science and Analytics (USP)**
-* Bachelor's degree in **Computer Engineering (UERJ)**
+* Bachelor of **Science in Electrical and Computer Engineering (UERJ)**
 * Special interest in statistical models, interpretability, and applied AI
 
 ---
